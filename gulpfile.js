@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
 var browserify = require('browserify');
+var watch = require('gulp-watch');
 var watchify = require('watchify');
 var babelify = require('babelify'); 
 var gulpif = require('gulp-if');
@@ -14,6 +15,7 @@ var shell = require('gulp-shell');
 var glob = require('glob');
 var webserver = require('gulp-webserver');
 var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
+var rt = require('gulp-react-templates');
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -22,6 +24,26 @@ var dependencies = [
   'react/addons',
   'flux-react'
 ];
+
+
+var reactTemplateTask = function(options) {
+  var start = Date.now();
+  console.log('Precompiling react-templates');
+  var precompileTemplates = function() {
+    gulp.src(options.src)
+      .pipe(rt({modules: 'commonjs'}))
+      .pipe(gulp.dest(options.dest))
+      .pipe(notify(function () {
+        console.log('react-templates built in ' + (Date.now() - start) + 'ms');
+      }));
+  };
+
+  precompileTemplates();
+
+  if (options.development) {
+    watch(options.src, precompileTemplates);
+  }
+};
 
 var browserifyTask = function (options) {
 
@@ -59,7 +81,7 @@ var browserifyTask = function (options) {
     appBundler = watchify(appBundler);
     appBundler.on('update', rebundle);
   }
-      
+
   rebundle();
 
   // We create a separate bundle for our dependencies as they
@@ -160,6 +182,13 @@ var webserverTask = function(options) {
 // Starts our development workflow
 gulp.task('default', function () {
 
+  // Turns *.rt to .js files for use in the application (see gulp-react-templates)
+  reactTemplateTask({
+    development: true,
+    src: './app/**/*.rt',
+    dest: './app'
+  });
+
   browserifyTask({
     development: true,
     src: './app/main.js',
@@ -181,9 +210,11 @@ gulp.task('default', function () {
 
 });
 
-
-
 gulp.task('deploy', function () {
+
+  reactTemplateTask({
+    development: false
+  });
 
   browserifyTask({
     development: false,

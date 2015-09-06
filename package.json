@@ -15,10 +15,12 @@
     "gulp-jasmine2-phantomjs": "^0.2.0",
     "gulp-livereload": "^3.8.0",
     "gulp-notify": "^2.2.0",
+    "gulp-react-templates": "^0.1.0",
     "gulp-shell": "^0.4.2",
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
+    "gulp-watch": "^4.3.5",
     "gulp-webserver": "^0.9.1",
     "phantomjs": "^1.9.17",
     "vinyl-source-stream": "^1.1.0",
@@ -26,6 +28,7 @@
   },
   "dependencies": {
     "flux-react": "^2.6.6",
+    "lodash": "^3.10.1",
     "react": "^0.13.3"
   }
 }
