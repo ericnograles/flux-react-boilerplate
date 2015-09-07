@@ -1,6 +1,6 @@
 var React = require('react');
 var MessageFormTemplate = require('./MessageForm.rt.js');
-var MessageTemplate = require('./Message.rt.js');
+var Message = require('./Message.js');
 var MessageStore = require('../../stores/MessageStore.js');
 var messageActions = require('../../actions/MessageActions.js');
 
@@ -36,9 +36,9 @@ var MessageForm = React.createClass({
       newMessage: event.target.value
     });
   },
-  renderMessages: function (message) {
+  renderMessages: function (text) {
     return (
-      <div>{message}</div>
+      <Message text={text} class="fancyClass" />
     );
   },
   render: MessageFormTemplate
