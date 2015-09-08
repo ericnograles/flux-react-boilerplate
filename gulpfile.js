@@ -90,7 +90,7 @@ var browserifyTask = function (options) {
   // in the application bundle
   if (options.development) {
 
-  	var testFiles = glob.sync('./specs/**/*-spec.js');
+  	var testFiles = glob.sync('./app/**/*.spec.js');
 		var testBundler = browserify({
 			entries: testFiles,
 			debug: true, // Gives us sourcemapping
