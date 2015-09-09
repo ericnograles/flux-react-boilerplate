@@ -1,25 +1,32 @@
 ## FLUX React JS Boilerplate
 
-Based on the architecture suggestions from Facebook, this boilerplate will help you deal with it. It has included the flux-react extension to React JS, [flux-react](https://github.com/christianalfoni/flux-react). 
+### Forked from [flux-react-boilerplate](https://github.com/christianalfoni/flux-react-boilerplate)
 
-Read more about FLUX over at [Facebook Flux](http://facebook.github.io/flux/) and I wrote a post about it too: [My experiences building a FLUX application](http://christianalfoni.github.io/javascript/2014/10/27/my-experiences-building-a-flux-application.html) and [React JS and FLUX](http://christianalfoni.github.io/javascript/2014/08/20/react-js-and-flux.html)
+## Overview
+
+This project is intended to be a boilerplate of best practices for Flux and React gathered fom Christian's original fork along with some gulpfile support to support environment-specific CI, automated unit tests, live reloading web server, and an opinionated structure on how to organize your React code.
+
+The patterns in the project are partially inspired by my prior work in AngularJS, specifically [MEAN-Enterprise](https://github.com/CraftySquad/mean-enterprise.ui).
 
 ### Development
 * Run `npm install`
 * Run `gulp`
-* Start a webservice in the `build` folder, f.ex. `python -m SimpleHTTPServer`
-* Go to `localhost:8000` to display the app
-* Go to `localhost:8000/testrunner.html` to see your tests
+* Go to `localhost:8200` to display the app
 * Any changes to `app` or `styles` folder will automatically rebuild to `build` folder
-* Both tests and application changes will refresh automatically in the browser
-* Run `gulp test` to run all tests with phantomJS and produce XML reports
 
 ### Minify the code, ready for production
 * Run `gulp deploy`
 
 ### Directory
+* **app/**: Where your React code lives
+  * **.spec.js files**: The opinion of this project is to set unit tests alongside of your code for accessibility
+  * **.rt files**: We use react-templates to divorce the HTML DOM from the actual React files. Intermingling templates (be it JSX or otherwise) with JS files never sat well with me  :)
 * **build/**: Where your automatically builds to. This is where you launch your app in development
 * **dist/**: Where the deployed code exists, ready for production
 * **styles/**: Where you put your css files
-* **specs/**: Where you put your test files
 * **gulpfile**: Gulp configuration
+
+### TODO's
+* Automated unit tests in gulp via Phantom and Karma
+* SASS support
+* Material Design Lite
