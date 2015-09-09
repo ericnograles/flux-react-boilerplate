@@ -16,6 +16,11 @@ var glob = require('glob');
 var webserver = require('gulp-webserver');
 var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
 var rt = require('gulp-react-templates');
+var template = require('gulp-template');
+
+// Swap out TRAVIS_BRANCH with your CI environment variable of choice
+var environment = process.env.TRAVIS_BRANCH || 'dev';
+var gulpConfig = require('./config/gulpfile.conf.js')[environment];
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -25,6 +30,31 @@ var dependencies = [
   'flux-react'
 ];
 
+var indexTask = function(options) {
+  var templateOptions = {
+    socketIOPath: gulpConfig.socketIOPath,
+    app: options.app,
+    vendor: options.vendor,
+    css: options.css
+  };
+
+  var copyIndex = function() {
+    var start = Date.now();
+    console.log('Copying index.html');
+    gulp.src(options.src)
+      .pipe(template(templateOptions))
+      .pipe(gulp.dest(options.dest))
+      .pipe(notify(function() {
+        console.log('index.html built in ' + (Date.now() - start) + 'ms');
+      }));
+  };
+
+  copyIndex();
+
+  if (options.development) {
+    watch(options.src, copyIndex());
+  }
+};
 
 var reactTemplateTask = function(options) {
   var start = Date.now();
@@ -182,21 +212,31 @@ var webserverTask = function(options) {
 // Starts our development workflow
 gulp.task('default', function () {
 
+  // Copies index.html fresh over to ./build with environment specific transforms
+  indexTask({
+    development: environment === 'dev',
+    src: './app/index.html',
+    app: 'main.js',
+    vendor: 'vendors.js',
+    css: 'main.css',
+    dest: './build'
+  });
+
   // Turns *.rt to .js files for use in the application (see gulp-react-templates)
   reactTemplateTask({
-    development: true,
+    development: environment === 'dev',
     src: './app/**/*.rt',
     dest: './app'
   });
 
   browserifyTask({
-    development: true,
+    development: environment === 'dev',
     src: './app/main.js',
     dest: './build'
   });
   
   cssTask({
-    development: true,
+    development: environment === 'dev',
     src: './styles/**/*.css',
     dest: './build'
   });
@@ -204,7 +244,7 @@ gulp.task('default', function () {
   webserverTask({
     livereload: true,
     port: 8200,
-    development: true,
+    development: environment === 'dev',
     src: './build'
   });
 
@@ -212,18 +252,29 @@ gulp.task('default', function () {
 
 gulp.task('deploy', function () {
 
+  indexTask({
+    development: environment === 'dev',
+    src: './app/index.html',
+    app: 'main.js',
+    vendor: 'vendors.js',
+    css: 'main.css',
+    dest: './dist'
+  });
+
   reactTemplateTask({
-    development: false
+    development: environment === 'dev',
+    src: './app/**/*.rt',
+    dest: './app'
   });
 
   browserifyTask({
-    development: false,
+    development: environment === 'dev',
     src: './app/main.js',
     dest: './dist'
   });
   
   cssTask({
-    development: false,
+    development: environment === 'dev',
     src: './styles/**/*.css',
     dest: './dist'
   });
