@@ -1,3 +1,5 @@
 .idea
 node_modules
 *.rt.js
+build
+dist
