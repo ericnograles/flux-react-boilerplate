@@ -1,1 +1,1 @@
-<div>{this.props.text} of class {this.props.class}</div>
+<div>{this.props.text} has been modified</div>

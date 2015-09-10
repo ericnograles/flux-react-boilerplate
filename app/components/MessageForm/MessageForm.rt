@@ -1,5 +1,5 @@
 <div>
-  <div>Oh snap, Eric done decomposed MessageForm into a react-template</div>
+  <div>This is a live reloading, live refreshing app</div>
   {this.state.messages.map(this.renderMessages)}
   <form onSubmit="{this.addMessage}">
     <input ref="newMessage" type="text" value={this.state.newMessage} onChange="{this.updateNewMessage}"/>
