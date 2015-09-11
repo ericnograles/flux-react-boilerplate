@@ -14,9 +14,10 @@ var gutil = require('gulp-util');
 var shell = require('gulp-shell');
 var glob = require('glob');
 var webserver = require('gulp-webserver');
-var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
 var rt = require('gulp-react-templates');
 var template = require('gulp-template');
+var Server = require('karma').Server;
+
 
 // Swap out TRAVIS_BRANCH with your CI environment variable of choice
 var environment = process.env.TRAVIS_BRANCH || 'dev';
@@ -91,6 +92,10 @@ gulp.task('browserify-app', ['browserify-vendors'], function() {
 });
 
 gulp.task('browserify-vendors', function() {
+  // Remove react-addons if we are not in dev mode
+  if (!development) {
+    dependencies.splice(dependencies.indexOf('react/addons'), 1);
+  }
   var vendorsBundler = browserify({
     debug: true,
     require: dependencies
@@ -147,6 +152,35 @@ gulp.task('webserver',['compile-index', 'browserify-app', 'stylesheets'], functi
   } else {
     return;
   }
+});
+
+gulp.task('browserify-unit-tests', function() {
+  var testFiles = glob.sync(buildConfig.tests.src.toString());
+  var testBundler = browserify({
+    entries: testFiles,
+    debug: true, // Gives us sourcemapping
+    transform: [babelify],
+    cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+  });
+
+  testBundler.external(dependencies);
+
+  var start = new Date();
+  console.log('Building TEST bundle');
+  return testBundler.bundle()
+    .on('error', gutil.log)
+    .pipe(source(buildConfig.tests.dest))
+    .pipe(gulp.dest(environmentConfig.dest))
+    .pipe(notify(function () {
+      console.log('TEST bundle built in ' + (Date.now() - start) + 'ms');
+    }));
+});
+
+gulp.task('unit-tests', ['browserify-unit-tests'], function(done) {
+  new Server({
+    configFile: __dirname + '/config/karma.conf.js',
+    singleRun: !development
+  }, done).start();
 });
 
 // Starts our development workflow

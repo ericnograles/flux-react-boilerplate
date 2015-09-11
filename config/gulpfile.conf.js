@@ -4,7 +4,10 @@ module.exports = {
     srcDirectory: './app',
     stylesheets: ['./styles/**/*.css'],
     reactTemplates: './app/**/*.rt',
-    tests: ['./app/**/*.spec.js'],
+    tests: {
+      src: ['./app/**/*.spec.js'],
+      dest: 'specs.js'
+    },
     index: {
       template: './app/index.html',
       scripts: {
