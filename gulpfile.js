@@ -31,7 +31,8 @@ var dependencies = [
 	'react',
   'react/addons',
   'flux-react',
-  'react-router'
+  'react-router',
+  'history'
 ];
 
 gulp.task('compile-index', ['react-templates'], function() {
