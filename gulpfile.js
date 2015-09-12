@@ -94,6 +94,7 @@ gulp.task('browserify-app', ['browserify-vendors'], function() {
 gulp.task('browserify-vendors', function() {
   // Remove react-addons if we are not in dev mode
   if (!development) {
+    console.log('Not development');
     dependencies.splice(dependencies.indexOf('react/addons'), 1);
   }
   var vendorsBundler = browserify({
@@ -113,6 +114,28 @@ gulp.task('browserify-vendors', function() {
       console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
     }));
 
+});
+
+gulp.task('browserify-unit-tests', function() {
+  var testFiles = glob.sync(buildConfig.tests.src.toString());
+  var testBundler = browserify({
+    entries: testFiles,
+    debug: true, // Gives us sourcemapping
+    transform: [babelify],
+    cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+  });
+
+  testBundler.external(dependencies);
+
+  var start = new Date();
+  console.log('Building TEST bundle');
+  return testBundler.bundle()
+    .on('error', gutil.log)
+    .pipe(source(buildConfig.tests.dest))
+    .pipe(gulp.dest(environmentConfig.dest))
+    .pipe(notify(function () {
+      console.log('TEST bundle built in ' + (Date.now() - start) + 'ms');
+    }));
 });
 
 gulp.task('stylesheets', function() {
@@ -152,28 +175,6 @@ gulp.task('webserver',['compile-index', 'browserify-app', 'stylesheets'], functi
   } else {
     return;
   }
-});
-
-gulp.task('browserify-unit-tests', function() {
-  var testFiles = glob.sync(buildConfig.tests.src.toString());
-  var testBundler = browserify({
-    entries: testFiles,
-    debug: true, // Gives us sourcemapping
-    transform: [babelify],
-    cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
-  });
-
-  testBundler.external(dependencies);
-
-  var start = new Date();
-  console.log('Building TEST bundle');
-  return testBundler.bundle()
-    .on('error', gutil.log)
-    .pipe(source(buildConfig.tests.dest))
-    .pipe(gulp.dest(environmentConfig.dest))
-    .pipe(notify(function () {
-      console.log('TEST bundle built in ' + (Date.now() - start) + 'ms');
-    }));
 });
 
 gulp.task('unit-tests', ['browserify-unit-tests'], function(done) {
