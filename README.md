@@ -25,9 +25,9 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 
 ### Directory
 * **app/**: Where your React code lives
-  * **/actions**: Stores actions of your application
-  * **components**: Write your components and unit tests here by directory
-  * **stores**: Compose stores that your components will interact with
+  * **actions/**: Stores actions of your application
+  * **components/**: Write your components and unit tests here by directory
+  * **stores/**: Compose stores that your components will interact with
   * **.spec.js files**: The opinion of this project is to set unit tests alongside of your code for accessibility
   * **.rt files**: We use react-templates to divorce the HTML DOM from the actual React files. Intermingling templates (be it JSX or otherwise) with JS files never sat well with me  :)
 * **build/**: Where your automatically builds to. This is where you launch your app in development
