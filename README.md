@@ -13,12 +13,18 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 * An opinionated folder structure for organizing code and unit tests
 * Simple routing using [react-router](https://github.com/rackt/react-router)
 * Automate all build processes
+  * Assumes a dev, staging, qa, and production branching strategy
 
 ### Development
 * Run `npm install`
 * Run `gulp`
 * Go to `localhost:8200` to display the app
 * Any changes to `app` or `styles` folder will automatically rebuild to `build` folder
+
+### Deployment
+* Run `npm install`
+* Run `gulp deploy --environment staging` (or whatever environment you want to package)
+* (Optional) Run `node web.js` to serve up the content in ./dist to `localhost:8080`
 
 ### Directory
 * **app/**: Where your React code lives
