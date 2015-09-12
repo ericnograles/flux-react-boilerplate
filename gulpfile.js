@@ -30,7 +30,8 @@ var development = environment === 'dev';
 var dependencies = [
 	'react',
   'react/addons',
-  'flux-react'
+  'flux-react',
+  'react-router'
 ];
 
 gulp.task('compile-index', ['react-templates'], function() {

@@ -1,0 +1,3 @@
+<div>
+  {this.props.title} Dashboard
+</div>
