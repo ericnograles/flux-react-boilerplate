@@ -1,7 +1,24 @@
 var React = require('react');
 var Link = require('react-router').Link;
+var UserStore = require('../stores/UserStore.js');
 
 var App = React.createClass({
+	getInitialState: function() {
+		return {
+			profile: UserStore.getProfile()
+		};
+	},
+	componentWillMount: function () {
+		UserStore.addChangeListener(this.changeState);
+	},
+	componentWillUnmount: function () {
+		UserStore.removeChangeListener(this.changeState);
+	},
+	changeState: function() {
+		this.setState({
+			profile: UserStore.getProfile()
+		});
+	},
 	render: function() {
 		return (
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">

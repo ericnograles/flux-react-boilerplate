@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
 var browserify = require('browserify');
 var watch = require('gulp-watch');
-var watchify = require('watchify');
 var babelify = require('babelify'); 
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
@@ -11,7 +10,6 @@ var notify = require('gulp-notify');
 var concat = require('gulp-concat');
 var cssmin = require('gulp-cssmin');
 var gutil = require('gulp-util');
-var shell = require('gulp-shell');
 var glob = require('glob');
 var webserver = require('gulp-webserver');
 var rt = require('gulp-react-templates');
@@ -34,7 +32,8 @@ var dependencies = [
   'react/addons',
   'flux-react',
   'react-router',
-  'history'
+  'history',
+  'request'
 ];
 
 gulp.task('compile-index', ['react-templates'], function() {
