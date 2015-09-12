@@ -7,5 +7,4 @@ describe("App", function() {
     var app = React.addons.TestUtils.renderIntoDocument(<App />);
     expect(app.getDOMNode().tagName).toEqual('DIV');
   });
-
 });

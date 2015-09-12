@@ -63,7 +63,7 @@ gulp.task('react-templates', function() {
 
 });
 
-gulp.task('browserify-app', ['browserify-vendors'], function() {
+gulp.task('browserify-app', ['browserify-vendors', 'browserify-unit-tests'], function() {
   // Our app bundler
   var appBundler = browserify({
     entries: [buildConfig.src], // Only need initial file, browserify finds the rest
@@ -160,7 +160,7 @@ gulp.task('stylesheets', function() {
   }
 });
 
-gulp.task('webserver',['compile-index', 'browserify-app', 'stylesheets'], function() {
+gulp.task('webserver',['compile-index', 'unit-tests', 'stylesheets'], function() {
   if (development) {
     return gulp.src(environmentConfig.dest)
       .pipe(webserver({
@@ -177,18 +177,14 @@ gulp.task('webserver',['compile-index', 'browserify-app', 'stylesheets'], functi
   }
 });
 
-gulp.task('unit-tests', ['browserify-unit-tests'], function(done) {
+gulp.task('unit-tests', ['browserify-app'], function(done) {
   new Server({
     configFile: __dirname + '/config/karma.conf.js',
-    singleRun: !development
+    singleRun: true //!development
   }, done).start();
 });
 
 // Starts our development workflow
 gulp.task('default', ['webserver'], function () {
-  gulp.watch(buildConfig.watchFiles,['compile-index', 'browserify-app', 'stylesheets']);
-});
-
-gulp.task('test', function () {
-    return gulp.src('./build/testrunner-phantomjs.html').pipe(jasminePhantomJs());
+  gulp.watch(buildConfig.watchFiles,['compile-index', 'unit-tests', 'stylesheets']);
 });
