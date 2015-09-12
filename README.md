@@ -20,9 +20,6 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 * Go to `localhost:8200` to display the app
 * Any changes to `app` or `styles` folder will automatically rebuild to `build` folder
 
-### Minify the code, ready for production
-* Run `gulp deploy`
-
 ### Directory
 * **app/**: Where your React code lives
   * **actions/**: Stores actions of your application
@@ -36,5 +33,6 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 * **gulpfile**: Gulp configuration
 
 ### TODO's
+* Deployable code (uglified, minified) in gulp
 * SASS support
 * Material Design Lite integration
