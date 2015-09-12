@@ -103,7 +103,8 @@ gulp.task('browserify-vendors', function() {
   }
   var vendorsBundler = browserify({
     debug: true,
-    require: dependencies
+    require: dependencies,
+    entries: buildConfig.jsConcats
   });
 
   // Run the vendor bundle
@@ -169,6 +170,7 @@ gulp.task('webserver',['compile-index', 'unit-tests', 'stylesheets'], function()
     return gulp.src(environmentConfig.dest)
       .pipe(webserver({
         livereload: buildConfig.webServer.liveReload,
+        fallback: 'index.html',
         directoryListing: false,
         open: true,
         port: buildConfig.webServer.port

@@ -2,7 +2,8 @@ module.exports = {
   build: {
     src: './app/main.js',
     srcDirectory: './app',
-    stylesheets: ['./styles/**/*.css'],
+    jsConcats: ['./node_modules/material-design-lite/material.min.js'], // For libraries that we can't browserify in
+    stylesheets: ['./styles/**/*.css', './node_modules/material-design-lite/material.min.css'],
     reactTemplates: './app/**/*.rt',
     tests: {
       src: ['./app/**/*.spec.js'],
@@ -16,7 +17,7 @@ module.exports = {
         css: 'main.css'
       },
     },
-    watchFiles: ['./app/**/*.js', './app/**/*.rt', './styles/**/*.css'],
+    watchFiles: ['./app/**/*.html','./app/**/*.js', './app/**/*.rt', './styles/**/*.css'],
     dest: {
       build: './build',
       dist: './dist'
