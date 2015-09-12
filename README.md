@@ -27,10 +27,14 @@ The patterns in the project are partially inspired by my prior work in AngularJS
   * **stores/**: Compose stores that your components will interact with
   * **.spec.js files**: The opinion of this project is to set unit tests alongside of your code for accessibility
   * **.rt files**: We use react-templates to divorce the HTML DOM from the actual React files. Intermingling templates (be it JSX or otherwise) with JS files never sat well with me  :)
+* **config/**: Configurations to support gulp task automation and CI
+  * **gulpfile.conf.js**: All config variables needed by gulp task automation.
+  * **karma.conf.js**: Karma test runner configuration
 * **build/**: Where your automatically builds to. This is where you launch your app in development
 * **dist/**: Where the deployed code exists, ready for production
 * **styles/**: Where you put your css files
-* **gulpfile**: Gulp configuration
+* **gulpfile**: Gulp tasks
+
 
 ### TODO's
 * Deployable code (uglified, minified) in gulp
