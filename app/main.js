@@ -10,7 +10,7 @@ var createBrowserHistory = require('history/lib/createBrowserHistory');
 var routes = {
   path: '/',
   component: App,
-  location: 'history',
+  defaultRoute: { component: 'Dashboard'},
   childRoutes: [
     { path: 'dashboard', component: Dashboard },
     { path: 'messages', component: MessageForm }

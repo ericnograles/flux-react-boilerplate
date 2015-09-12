@@ -17,13 +17,15 @@ var webserver = require('gulp-webserver');
 var rt = require('gulp-react-templates');
 var template = require('gulp-template');
 var Server = require('karma').Server;
+var args = require('yargs').argv;
 
 
 // Swap out TRAVIS_BRANCH with your CI environment variable of choice
-var environment = process.env.TRAVIS_BRANCH || 'dev';
+// Optionally, pass in --environment [dev/staging/qa/prod] to override
+var environment = process.env.TRAVIS_BRANCH || args.environment || 'dev';
 var environmentConfig = require('./config/gulpfile.conf.js')[environment];
 var buildConfig = require('./config/gulpfile.conf.js').build;
-var development = environment === 'dev';
+var isDevelopment = environment === 'dev';
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -70,15 +72,15 @@ gulp.task('browserify-app', ['browserify-vendors', 'browserify-unit-tests'], fun
   var appBundler = browserify({
     entries: [buildConfig.src], // Only need initial file, browserify finds the rest
     transform: [babelify], // We want to convert JSX to normal javascript
-    debug: development, // Gives us sourcemapping
-    cache: {}, packageCache: {}, fullPaths: development // Requirement of watchify
+    debug: isDevelopment, // Gives us sourcemapping
+    cache: {}, packageCache: {}, fullPaths: isDevelopment // Requirement of watchify
   });
 
   // We set our dependencies as externals on our app bundler when developing.
   // You might consider doing this for production also and load two javascript
   // files (main.js and vendors.js), as vendors.js will probably not change and
   // takes full advantage of caching
-  appBundler.external(development ? dependencies : []);
+  appBundler.external(isDevelopment ? dependencies : []);
 
   // The rebundle process
   var start = Date.now();
@@ -86,7 +88,7 @@ gulp.task('browserify-app', ['browserify-vendors', 'browserify-unit-tests'], fun
   return appBundler.bundle()
     .on('error', gutil.log)
     .pipe(source(buildConfig.index.scripts.app))
-    .pipe(gulpif(!development, streamify(uglify())))
+    .pipe(gulpif(!isDevelopment, streamify(uglify())))
     .pipe(gulp.dest(environmentConfig.dest))
     .pipe(notify(function () {
       console.log('APP bundle built in ' + (Date.now() - start) + 'ms');
@@ -95,7 +97,7 @@ gulp.task('browserify-app', ['browserify-vendors', 'browserify-unit-tests'], fun
 
 gulp.task('browserify-vendors', function() {
   // Remove react-addons if we are not in dev mode
-  if (!development) {
+  if (!isDevelopment) {
     console.log('Not development');
     dependencies.splice(dependencies.indexOf('react/addons'), 1);
   }
@@ -110,7 +112,7 @@ gulp.task('browserify-vendors', function() {
   return vendorsBundler.bundle()
     .on('error', gutil.log)
     .pipe(source(buildConfig.index.scripts.vendors))
-    .pipe(gulpif(!development, streamify(uglify())))
+    .pipe(gulpif(!isDevelopment, streamify(uglify())))
     .pipe(gulp.dest(environmentConfig.dest))
     .pipe(notify(function () {
       console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
@@ -144,7 +146,7 @@ gulp.task('stylesheets', function() {
   var start = new Date();
   console.log('Building CSS bundle');
 
-  if (development) {
+  if (isDevelopment) {
     return gulp.src(buildConfig.stylesheets)
       .pipe(concat(buildConfig.index.scripts.css))
       .pipe(gulp.dest(environmentConfig.dest))
@@ -155,7 +157,7 @@ gulp.task('stylesheets', function() {
     return gulp.src(buildConfig.stylesheets)
       .pipe(concat(buildConfig.index.scripts.css))
       .pipe(cssmin())
-      .pipe(gulp.dest(options.dest))
+      .pipe(gulp.dest(environmentConfig.dest))
       .pipe(notify(function () {
         console.log('CSS (Minified) bundle built in ' + (Date.now() - start) + 'ms');
       }));
@@ -163,7 +165,7 @@ gulp.task('stylesheets', function() {
 });
 
 gulp.task('webserver',['compile-index', 'unit-tests', 'stylesheets'], function() {
-  if (development) {
+  if (isDevelopment) {
     return gulp.src(environmentConfig.dest)
       .pipe(webserver({
         livereload: buildConfig.webServer.liveReload,
@@ -177,6 +179,10 @@ gulp.task('webserver',['compile-index', 'unit-tests', 'stylesheets'], function()
   } else {
     return;
   }
+});
+
+gulp.task('deploy', ['compile-index', 'unit-tests', 'stylesheets'], function() {
+  console.log('Successfully deployed to ' + environmentConfig.dest);
 });
 
 gulp.task('unit-tests', ['browserify-app'], function(done) {
