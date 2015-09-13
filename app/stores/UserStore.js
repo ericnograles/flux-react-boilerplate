@@ -3,7 +3,7 @@ var actions = require('../actions/UserActions.js');
 var HttpService = require('../services/HttpService.js');
 
 module.exports = flux.createStore({
-  profile: {},
+  profile: null,
   actions: [
     actions.login,
     actions.logout

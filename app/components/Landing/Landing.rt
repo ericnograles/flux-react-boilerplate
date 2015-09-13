@@ -1,15 +1,17 @@
-<rt-require dependency="../Navigation/Navigation" as="Navigation" />
+<rt-require dependency="../Navigation/Navigation" as="Navigation"/>
 <div className="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <header className="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
     <div className="mdl-layout__header-row">
       <span className="mdl-layout-title">flux-react-boilerplate</span>
+
       <div className="mdl-layout-spacer"></div>
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
         <label className="mdl-button mdl-js-button mdl-button--icon" for="search">
           <i className="material-icons">search</i>
         </label>
+
         <div className="mdl-textfield__expandable-holder">
-          <input className="mdl-textfield__input" type="text" id="search" />
+          <input className="mdl-textfield__input" type="text" id="search"/>
           <label className="mdl-textfield__label" for="search">Enter your query...</label>
         </div>
       </div>
@@ -35,6 +37,7 @@
         </div>
         <div class="mdl-cell mdl-cell--12-col">
           <p>This boilerplate demonstrates an opinionated approach to a Flux/React architecture.</p>
+
           <p>Included in this boilerplate on top of Flux and React are the following:</p>
           <ul>
             <li>react-templates</li>

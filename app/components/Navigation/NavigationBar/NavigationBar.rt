@@ -1,6 +1,7 @@
 <rt-require dependency="../NavigationItem/NavigationItem" as="NavigationItem" />
 <nav className="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-  <NavigationItem icon-name="home" route="/dashboard" label="Dashboard" />
+  <NavigationItem icon-name="home" route="/" label="Home" />
+  <NavigationItem icon-name="trending_up" route="/dashboard" label="Dashboard" />
   <div className="mdl-layout-spacer"></div>
   <a className="mdl-navigation__link" href=""><i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span className="visuallyhidden">Help</span></a>
 </nav>

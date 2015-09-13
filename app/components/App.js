@@ -6,6 +6,7 @@ var history = require('../history.js');
 
 var App = React.createClass({
 	getInitialState: function() {
+		document.title = 'flux-react-boilerplate: the remix';
 		return {
 			username: null,
 			password: null,
@@ -31,7 +32,7 @@ var App = React.createClass({
 	changeState: function() {
 		var profile = UserStore.getProfile();
 		if (profile) {
-			history.replaceState(null, '/landing');
+			history.replaceState(null, '/');
 		} else {
 			this.state.errorMessage = 'Login unsuccessful. Please try again.';
 		}
