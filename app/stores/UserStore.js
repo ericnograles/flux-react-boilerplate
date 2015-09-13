@@ -11,7 +11,7 @@ module.exports = flux.createStore({
   login: function(username, password) {
     var store = this;
     var options = {
-      url: 'http://localhost:8080/login',
+      url: 'https://flux-react-boilerplate.herokuapp.com/login',
       method: 'POST',
       body: JSON.stringify({username: username, password: password})
     };
