@@ -7,12 +7,11 @@ module.exports = {
    * @param cb {function} - The function to callback for the result
    */
   send: function(requestOptions, cb) {
+    // Header override
+    requestOptions.headers = requestOptions.headers || {};
     if (localStorage.jwt) {
-      requestOptions.headers = {
-        'Authorization': 'Bearer ' + localStorage.jwt
-      };
+      requestOptions.headers['authorization'] = 'Bearer ' + localStorage.jwt;
     }
-
     requestOptions.headers['content-type'] = 'application/json';
 
     function callback(error, response, body) {
