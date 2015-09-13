@@ -49,6 +49,4 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 
 
 ### TODO's
-* Deployable code (uglified, minified) in gulp
 * SASS support
-* Material Design Lite integration
