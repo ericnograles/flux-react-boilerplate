@@ -1,30 +1,44 @@
-<rt-require dependency="./Navigation/Navigation" as="Navigation" />
-<div className="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header className="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
-    <div className="mdl-layout__header-row">
-      <span className="mdl-layout-title">React Boilerplate</span>
-      <div className="mdl-layout-spacer"></div>
-      <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-        <label className="mdl-button mdl-js-button mdl-button--icon" for="search">
-          <i className="material-icons">search</i>
-        </label>
-        <div className="mdl-textfield__expandable-holder">
-          <input className="mdl-textfield__input" type="text" id="search" />
-          <label className="mdl-textfield__label" for="search">Enter your query...</label>
-        </div>
+<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <div className="android-content mdl-layout__content">
+    <a name="top"></a>
+    <a href="https://github.com/ericnograles/flux-react-boilerplate" target="_blank">
+      <img style="position: absolute; top: 0; right: 0; border: 0;"
+           src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
+           alt="Fork me on GitHub"
+           data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
+    </a>
+
+    <div className="mdl-typography--text-center">
+      <div className="android-font android-slogan">
+        flux-react-boilerplate
       </div>
-      <button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-        <i className="material-icons">more_vert</i>
-      </button>
-      <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-        <li className="mdl-menu__item">About</li>
-        <li className="mdl-menu__item">Contact</li>
-        <li className="mdl-menu__item">Legal information</li>
-      </ul>
+      <div className="android-font android-sub-slogan">
+        the remix
+      </div>
+      <form onSubmit="{this.handleSubmit}">
+        <div className="android-font android-customized-section-text">
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input className="mdl-textfield__input" type="text" id="login-username" onChange="{this.updateUsername}"/>
+            <label className="mdl-textfield__label" for="login-username">Username</label>
+          </div>
+        </div>
+        <div className="android-font android-customized-section-text">
+          <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input className="mdl-textfield__input" type="password" id="login-password" onChange="{this.updatePassword}"/>
+            <label className="mdl-textfield__label" for="login-password">Password</label>
+          </div>
+        </div>
+        <div className="android-font android-customized-section-text">
+          <button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored" type="submit">
+            Login
+          </button>
+          <br /> <br />
+          <div className="{this.state.loggingIn ? 'mdl-spinner mdl-js-spinner is-active' : 'mdl-spinner mdl-js-spinner is-active hidden'}"></div>
+        </div>
+      </form>
+      <div className="android-font android-customized-section-text">
+        <span>Made with &#9829; by </span> <a href="https://github.com/ericnograles" target="_blank">Eric Nograles</a>
+      </div>
     </div>
-  </header>
-  <Navigation></Navigation>
-  <main className="mdl-layout__content mdl-color--grey-100">
-    {this.props.children}
-  </main>
+  </div>
 </div>

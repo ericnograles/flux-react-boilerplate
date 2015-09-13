@@ -1,1 +1,0 @@
-<div>{this.props.text} has been modified again!</div>

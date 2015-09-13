@@ -20,11 +20,13 @@ app.get('*', function(request, response){
 });
 
 app.post('/login', function(req, res) {
+  console.log('/login ' + JSON.stringify(req.body));
   var token = jwt.sign(JSON.stringify(req.body), secret);
   return res.status(200).json({username: req.body.username, access_token: token});
 });
 
 app.post('/logout', function(req, res) {
+  console.log('logout ' + JSON.stringify(req.headers));
   jwt.verify(req.headers['authorization'].replace('Bearer ', ''), secret, function(err, decoded) {
     var dto = JSON.parse(decoded);
     if (err) {

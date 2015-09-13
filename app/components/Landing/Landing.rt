@@ -1,0 +1,49 @@
+<rt-require dependency="../Navigation/Navigation" as="Navigation" />
+<div className="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <header className="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+    <div className="mdl-layout__header-row">
+      <span className="mdl-layout-title">flux-react-boilerplate</span>
+      <div className="mdl-layout-spacer"></div>
+      <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+        <label className="mdl-button mdl-js-button mdl-button--icon" for="search">
+          <i className="material-icons">search</i>
+        </label>
+        <div className="mdl-textfield__expandable-holder">
+          <input className="mdl-textfield__input" type="text" id="search" />
+          <label className="mdl-textfield__label" for="search">Enter your query...</label>
+        </div>
+      </div>
+      <button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+        <i className="material-icons">more_vert</i>
+      </button>
+      <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+        <li className="mdl-menu__item">About</li>
+        <li className="mdl-menu__item">Contact</li>
+        <li className="mdl-menu__item">Legal information</li>
+      </ul>
+    </div>
+  </header>
+  <Navigation></Navigation>
+  <main rt-if="this.props.children" className="mdl-layout__content mdl-color--grey-100">
+    {this.props.children}
+  </main>
+  <main rt-if="!this.props.children" className="mdl-layout__content mdl-color--grey-100">
+    <div class="mdl-grid demo-content">
+      <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h3>Welcome!</h3>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+          <p>This boilerplate demonstrates an opinionated approach to a Flux/React architecture.</p>
+          <p>Included in this boilerplate on top of Flux and React are the following:</p>
+          <ul>
+            <li>react-templates</li>
+            <li>react-router</li>
+            <li>material-design-lite</li>
+            <li>Express.js</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

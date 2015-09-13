@@ -1,14 +1,15 @@
 var React = require('react');
-var Link = require('react-router').Link;
 var UserStore = require('../stores/UserStore.js');
+var UserActions = require('../actions/UserActions.js');
 var AppTemplate = require('./App.rt.js');
 var history = require('../history.js');
-
 
 var App = React.createClass({
 	getInitialState: function() {
 		return {
-			profile: UserStore.getProfile()
+			username: null,
+			password: null,
+			loggingIn: false
 		};
 	},
 	componentWillMount: function () {
@@ -17,12 +18,32 @@ var App = React.createClass({
 	componentWillUnmount: function () {
 		UserStore.removeChangeListener(this.changeState);
 	},
-	navigateTo: function(route) {
-		history.replaceState(null, route);
+	handleSubmit: function(event) {
+		event.preventDefault();
+		var component = this;
+		this.setState({
+			loggingIn: true
+		});
+		setTimeout(function() {
+			UserActions.login(component.state.username, component.state.password);
+		}, 1000);
 	},
 	changeState: function() {
+		var profile = UserStore.getProfile();
+		if (profile) {
+			history.replaceState(null, '/landing');
+		} else {
+			this.state.errorMessage = 'Login unsuccessful. Please try again.';
+		}
+	},
+	updateUsername: function (event) {
 		this.setState({
-			profile: UserStore.getProfile()
+			username: event.target.value
+		});
+	},
+	updatePassword: function (event) {
+		this.setState({
+			password: event.target.value
 		});
 	},
 	render: AppTemplate
