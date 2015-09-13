@@ -47,7 +47,7 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 * **dist/**: Where the deployed code exists, ready for production
 * **styles/**: Where you put your css files
 * **gulpfile**: Gulp tasks
-* **web.js**: A minimalist Express server that simulates jwt authentication and content distribution for HTML5 modeUpda
+* **web.js**: A minimalist Express server that simulates jwt authentication and content distribution for HTML5 mode
 
 
 ### TODO's
