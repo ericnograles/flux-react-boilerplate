@@ -95,14 +95,15 @@ gulp.task('browserify-app', ['browserify-vendors', 'browserify-unit-tests'], fun
 });
 
 gulp.task('browserify-vendors', function() {
+  var externalDependencies = dependencies;
   // Remove react-addons if we are not in dev mode
   if (!isDevelopment) {
     console.log('Not development');
-    dependencies.splice(dependencies.indexOf('react/addons'), 1);
+    //externalDependencies.splice(externalDependencies.indexOf('react/addons'), 1);
   }
   var vendorsBundler = browserify({
     debug: true,
-    require: dependencies,
+    require: externalDependencies,
     entries: buildConfig.jsConcats
   });
 
