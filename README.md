@@ -9,11 +9,14 @@ This project is intended to be a boilerplate of best practices for Flux and Reac
 The patterns in the project are partially inspired by my prior work in AngularJS, specifically [MEAN-Enterprise](https://github.com/CraftySquad/mean-enterprise.ui).
 
 ## Summary of Architecture
-* Minimize/divorce JSX from component code using [react-templates](https://github.com/wix/react-templates)
-* An opinionated folder structure for organizing code and unit tests
-* Simple routing using [react-router](https://github.com/rackt/react-router)
-* Automate all build processes
-  * Assumes a dev, staging, qa, and production branching strategy
+* **Routing**: [react-router](https://github.com/rackt/react-router)
+* **Templates**: [react-templates](https://github.com/wix/react-templates)
+* **HTTP**: [request](https://github.com/request/request)
+* **UI**: [material-design-lite](https://github.com/google/material-design-lite)
+* **Other Notes**
+  * An opinionated folder structure for organizing code and unit tests
+  * Automate all build processes
+  * Assumes a dev, staging, qa, and production branching strategy with built-in TravisCI assumption
 
 ### Development
 * Run `npm install`
@@ -31,6 +34,7 @@ The patterns in the project are partially inspired by my prior work in AngularJS
   * **actions/**: Stores actions of your application
   * **components/**: Write your components and unit tests here by directory
   * **stores/**: Compose stores that your components will interact with
+  * **services/**: Application-wide services
   * **.spec.js files**: The opinion of this project is to set unit tests alongside of your code for accessibility
   * **.rt files**: We use react-templates to divorce the HTML DOM from the actual React files. Intermingling templates (be it JSX or otherwise) with JS files never sat well with me  :)
 * **config/**: Configurations to support gulp task automation and CI
