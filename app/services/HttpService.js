@@ -13,6 +13,8 @@ module.exports = {
       };
     }
 
+    requestOptions.headers['content-type'] = 'application/json';
+
     function callback(error, response, body) {
       var dto = body ? JSON.parse(body) : error;
       cb(error, dto);

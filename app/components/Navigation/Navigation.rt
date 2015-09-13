@@ -1,0 +1,6 @@
+<rt-require dependency="./NavigationHeader/NavigationHeader" as="NavigationHeader" />
+<rt-require dependency="./NavigationBar/NavigationBar" as="NavigationBar" />
+<div className="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+  <NavigationHeader></NavigationHeader>
+  <NavigationBar></NavigationBar>
+</div>

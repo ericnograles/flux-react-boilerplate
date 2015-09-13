@@ -5,7 +5,7 @@ var Dashboard = require('./components/Dashboard/Dashboard.js');
 var Login = require('./components/Login/Login.js');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
-var createBrowserHistory = require('history/lib/createBrowserHistory');
+var history = require('./history.js');
 
 // Define your routes below
 var routes = {
@@ -20,5 +20,5 @@ var routes = {
 };
 
 React.render((
-  <Router history={createBrowserHistory()} routes={routes} />
+  <Router history={history} routes={routes} />
 ), document.body);

@@ -20,16 +20,17 @@ app.get('*', function(request, response){
 });
 
 app.post('/login', function(req, res) {
-  var token = jwt.sign(req.body, secret);
+  var token = jwt.sign(JSON.stringify(req.body), secret);
   return res.status(200).json({username: req.body.username, access_token: token});
 });
 
 app.post('/logout', function(req, res) {
   jwt.verify(req.headers['authorization'].replace('Bearer ', ''), secret, function(err, decoded) {
+    var dto = JSON.parse(decoded);
     if (err) {
       return res.status(500).end();
     } else {
-      return res.status(200).json({message: 'Logged off ' + decoded.username});
+      return res.status(200).json({message: 'Logged off ' + dto.username});
     }
   });
 });
