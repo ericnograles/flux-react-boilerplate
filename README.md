@@ -8,7 +8,7 @@ This project is intended to be a boilerplate of best practices for Flux and Reac
 
 The patterns in the project are partially inspired by my prior work in AngularJS, specifically [MEAN-Enterprise](https://github.com/CraftySquad/mean-enterprise.ui).
 
-## Summary of Architecture
+## Architecture
 * **Routing**: [react-router](https://github.com/rackt/react-router)
 * **Templates**: [react-templates](https://github.com/wix/react-templates)
 * **HTTP**: [request](https://github.com/request/request)
@@ -17,6 +17,8 @@ The patterns in the project are partially inspired by my prior work in AngularJS
   * An opinionated folder structure for organizing code and unit tests
   * Automate all build processes
   * Assumes a dev, staging, qa, and production branching strategy with built-in TravisCI assumption
+
+## Usage
 
 ### Development
 * Run `npm install`
