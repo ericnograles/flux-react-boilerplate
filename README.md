@@ -2,11 +2,11 @@
 
 ### Forked from [flux-react-boilerplate](https://github.com/christianalfoni/flux-react-boilerplate)
 
-## Overview
+## Vision
 
 This project is intended to be a boilerplate of best practices for Flux and React gathered fom Christian's original fork along with some gulpfile support to support environment-specific CI, automated unit tests, live reloading web server, and an opinionated structure on how to organize your React code.
 
-The patterns in the project are partially inspired by my prior work in AngularJS, specifically [MEAN-Enterprise](https://github.com/CraftySquad/mean-enterprise.ui).
+The patterns in the project are partially inspired by my prior work in AngularJS, specifically [MEAN-Enterprise](https://github.com/CraftySquad/mean-enterprise.ui). The main goal I wanted to accomplish was to create a React boilerplate that would be somewhat familiar to Angular folks, so I hope that gives context to the architectural decisions below.
 
 ## Architecture
 * **Routing**: [react-router](https://github.com/rackt/react-router)
@@ -52,3 +52,7 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 
 ### TODO's
 * SASS support
+
+## Collaborating
+
+Full disclosure: I am far more versed in Angular than I am in React, and this boilerplate was my first deep dive into this exciting framework.  I would LOVE to collaborate with folks who want to make improvements or see anything egregious. Please log Issues as you see them and feel free to fork and PR!
