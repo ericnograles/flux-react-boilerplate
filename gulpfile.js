@@ -196,5 +196,5 @@ gulp.task('unit-tests', ['browserify-app'], function(done) {
 
 // Starts our development workflow
 gulp.task('default', ['webserver'], function () {
-  gulp.watch(buildConfig.watchFiles,['compile-index', 'unit-tests', 'stylesheets']);
+  gulp.watch(buildConfig.watchFiles, {readDelay: 600}, ['compile-index', 'unit-tests', 'stylesheets']);
 });

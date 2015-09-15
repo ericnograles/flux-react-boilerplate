@@ -10,10 +10,14 @@ var Landing = React.createClass({
     };
   },
   componentWillMount: function () {
+    componentHandler.upgradeDom();
     UserStore.addChangeListener(this.changeState);
   },
   componentWillUnmount: function () {
     UserStore.removeChangeListener(this.changeState);
+  },
+  componentDidUpdate: function() {
+    componentHandler.upgradeDom();
   },
   navigateTo: function(route) {
     history.replaceState(null, route);

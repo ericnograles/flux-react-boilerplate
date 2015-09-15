@@ -19,6 +19,9 @@ var App = React.createClass({
 	componentWillUnmount: function () {
 		UserStore.removeChangeListener(this.changeState);
 	},
+	componentDidUpdate: function() {
+		componentHandler.upgradeDom();
+	},
 	handleSubmit: function(event) {
 		event.preventDefault();
 		var component = this;

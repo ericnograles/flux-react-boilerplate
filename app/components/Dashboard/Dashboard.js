@@ -11,6 +11,9 @@ var MessageForm = React.createClass({
     console.log('Dashboard Mounted');
     return;
   },
+  componentDidUpdate: function() {
+    componentHandler.upgradeDom();
+  },
   componentWillUnmount: function () {
     console.log('Dashboard Unmounted');
     return;

@@ -25,25 +25,25 @@
         <h3>View options</h3>
         <ul>
           <li>
-            <label for="chkbox1" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <label htmlFor="chkbox1" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input type="checkbox" id="chkbox1" className="mdl-checkbox__input"/>
               <span className="mdl-checkbox__label">Click per object</span>
             </label>
           </li>
           <li>
-            <label for="chkbox2" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <label htmlFor="chkbox2" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input type="checkbox" id="chkbox2" className="mdl-checkbox__input"/>
               <span className="mdl-checkbox__label">Views per object</span>
             </label>
           </li>
           <li>
-            <label for="chkbox3" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <label htmlFor="chkbox3" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input type="checkbox" id="chkbox3" className="mdl-checkbox__input"/>
               <span className="mdl-checkbox__label">Objects selected</span>
             </label>
           </li>
           <li>
-            <label for="chkbox4" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <label htmlFor="chkbox4" className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input type="checkbox" id="chkbox4" className="mdl-checkbox__input"/>
               <span className="mdl-checkbox__label">Objects viewed</span>
             </label>
