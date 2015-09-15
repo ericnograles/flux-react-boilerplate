@@ -34,6 +34,7 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 
 ### Directory
 * **app/**: Where your React code lives
+  * **main.js**: The starting point of the application. Uses react-router to define initial routes and route hierarchy.
   * **actions/**: Stores actions of your application
   * **components/**: Write your components and unit tests here by directory
   * **stores/**: Compose stores that your components will interact with

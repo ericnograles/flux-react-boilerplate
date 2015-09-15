@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var App = require('./App.js');
+var App = require('./Login.js');
 
 describe("App", function() {
 

@@ -1,8 +1,8 @@
 var React = require('react');
-var UserStore = require('../stores/UserStore.js');
-var UserActions = require('../actions/UserActions.js');
-var AppTemplate = require('./App.rt.js');
-var history = require('../history.js');
+var UserStore = require('../../stores/UserStore.js');
+var UserActions = require('../../actions/UserActions.js');
+var AppTemplate = require('./Login.rt.js');
+var history = require('../../history.js');
 
 var App = React.createClass({
 	getInitialState: function() {

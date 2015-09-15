@@ -1,9 +1,8 @@
 var React = require('react');
-var App = require('./components/App.js');
+var Login = require('./components/Login/Login.js');
 var Landing = require('./components/Landing/Landing.js');
 var Dashboard = require('./components/Dashboard/Dashboard.js');
 var Router = require('react-router').Router;
-var Route = require('react-router').Route;
 var UserStore = require('./stores/UserStore.js');
 var history = require('./history.js');
 
@@ -19,7 +18,7 @@ var routes =
   [
     {
       path: '/login',
-      component: App
+      component: Login
     },
     {
       path: '/',
