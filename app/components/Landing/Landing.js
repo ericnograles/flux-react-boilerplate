@@ -16,7 +16,12 @@ var Landing = React.createClass({
   componentWillUnmount: function () {
     UserStore.removeChangeListener(this.changeState);
   },
+  componentDidMount: function() {
+    // MDL
+    componentHandler.upgradeDom();
+  },
   componentDidUpdate: function() {
+    // MDL
     componentHandler.upgradeDom();
   },
   navigateTo: function(route) {

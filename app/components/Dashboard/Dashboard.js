@@ -11,7 +11,12 @@ var MessageForm = React.createClass({
     console.log('Dashboard Mounted');
     return;
   },
+  componentDidMount: function() {
+    // MDL
+    componentHandler.upgradeDom();
+  },
   componentDidUpdate: function() {
+    // MDL
     componentHandler.upgradeDom();
   },
   componentWillUnmount: function () {

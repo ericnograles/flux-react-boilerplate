@@ -30,6 +30,11 @@ var routes =
     }
   ];
 
+document.addEventListener('DOMContentLoaded', function(event) {
+  // MDL accommodation
+  componentHandler.upgradeDom();
+});
+
 React.render((
   <Router history={history} routes={routes} />
 ), document.body);

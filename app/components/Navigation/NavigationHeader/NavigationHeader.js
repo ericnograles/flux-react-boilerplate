@@ -15,6 +15,14 @@ var NavigationHeader = React.createClass({
   componentWillUnmount: function () {
     UserStore.removeChangeListener(this.changeState);
   },
+  componentDidMount: function() {
+    // MDL
+    componentHandler.upgradeDom();
+  },
+  componentDidUpdate: function() {
+    // MDL
+    componentHandler.upgradeDom();
+  },
   changeState: function() {
     var profile = UserStore.getProfile();
     this.setState({

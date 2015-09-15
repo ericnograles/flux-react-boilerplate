@@ -19,7 +19,12 @@ var App = React.createClass({
 	componentWillUnmount: function () {
 		UserStore.removeChangeListener(this.changeState);
 	},
+	componentDidMount: function() {
+		// MDL
+		componentHandler.upgradeDom();
+	},
 	componentDidUpdate: function() {
+		// MDL
 		componentHandler.upgradeDom();
 	},
 	handleSubmit: function(event) {
