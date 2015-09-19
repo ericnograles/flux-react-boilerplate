@@ -4,6 +4,7 @@ module.exports = {
     srcDirectory: './app',
     jsConcats: ['./node_modules/material-design-lite/material.min.js'], // For libraries that we can't browserify in
     stylesheets: ['./node_modules/material-design-lite/material.min.css', './styles/**/*.css'],
+    assets: ['./assets/**'],
     reactTemplates: './app/**/*.rt',
     tests: {
       src: ['./app/**/*.spec.js'],

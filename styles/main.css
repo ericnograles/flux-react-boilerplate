@@ -203,6 +203,33 @@ a img{
 	bottom: 16px;
 }
 
+.headstone {
+	width: 268px;
+	height: 301px;
+	background: url('images/gravestone.png') center 30% no-repeat;
+	background-size: cover;
+	margin: 0 auto;
+}
+
+
+.headstone-title {
+	height: auto;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.headstone-details {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.cross {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
 .android-be-together-section {
 	position: relative;
 	height: 800px;

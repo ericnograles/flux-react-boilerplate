@@ -143,7 +143,17 @@ gulp.task('browserify-unit-tests', function() {
     }));
 });
 
-gulp.task('stylesheets', function() {
+gulp.task('assets', function() {
+  var start = new Date();
+  console.log('Copying Assets');
+  return gulp.src(buildConfig.assets)
+    .pipe(gulp.dest(environmentConfig.dest))
+    .pipe(notify(function() {
+      console.log('Assets copied in ' + (Date.now() - start) + 'ms');
+    }));
+});
+
+gulp.task('stylesheets',['assets'], function() {
   var start = new Date();
   console.log('Building CSS bundle');
 
