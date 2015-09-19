@@ -1,52 +1,115 @@
-<rt-require dependency="../Navigation/Navigation" as="Navigation"/>
-<div className="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header className="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
-    <div className="mdl-layout__header-row">
-      <span className="mdl-layout-title">flux-react-boilerplate</span>
+<div>
+  <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div className="android-header mdl-layout__header mdl-layout__header--waterfall">
+      <div className="mdl-layout__header-row">
+          <span className="android-title mdl-layout-title">
+            <img className="android-logo-image" src="http://www.werememberfilm.com/wr_logo.png">
+          </span>
+        <!-- Add spacer, to align navigation to the right in desktop -->
+        <div className="android-header-spacer mdl-layout-spacer"></div>
+        <div
+          className="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+          <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search-field">
+            <i className="material-icons">search</i>
+          </label>
 
-      <div className="mdl-layout-spacer"></div>
-      <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-        <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search">
-          <i className="material-icons">search</i>
-        </label>
-
-        <div className="mdl-textfield__expandable-holder">
-          <input className="mdl-textfield__input" type="text" id="search"/>
-          <label className="mdl-textfield__label" htmlFor="search">Enter your query...</label>
+          <div className="mdl-textfield__expandable-holder">
+            <input className="mdl-textfield__input" type="text" id="search-field"/>
+          </div>
         </div>
-      </div>
-      <button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-        <i className="material-icons">more_vert</i>
-      </button>
-      <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" htmlFor="hdrbtn">
-        <li className="mdl-menu__item">About</li>
-        <li className="mdl-menu__item">Contact</li>
-        <li className="mdl-menu__item">Legal information</li>
-      </ul>
-    </div>
-  </header>
-  <Navigation></Navigation>
-  <main rt-if="this.props.children" className="mdl-layout__content mdl-color--grey-100">
-    {this.props.children}
-  </main>
-  <main rt-if="!this.props.children" className="mdl-layout__content mdl-color--grey-100">
-    <div class="mdl-grid demo-content">
-      <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col">
-          <h3>Welcome!</h3>
+        <!-- Navigation -->
+        <div className="android-navigation-container">
+          <nav className="android-navigation mdl-navigation">
+            <a className="mdl-navigation__link mdl-typography--text-uppercase" href="">About</a>
+            <a className="mdl-navigation__link mdl-typography--text-uppercase" href="">Donate</a>
+            <a className="mdl-navigation__link mdl-typography--text-uppercase" href="">Contact</a>
+          </nav>
         </div>
-        <div class="mdl-cell mdl-cell--12-col">
-          <p>This boilerplate demonstrates an opinionated approach to a Flux/React architecture.</p>
-
-          <p>Included in this boilerplate on top of Flux and React are the following:</p>
-          <ul>
-            <li>react-templates</li>
-            <li>react-router</li>
-            <li>material-design-lite</li>
-            <li>Express.js</li>
-          </ul>
-        </div>
+        <button className="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+                id="more-button">
+          <i className="material-icons">more_vert</i>
+        </button>
+        <ul className="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" htmlFor="more-button">
+          <li className="mdl-menu__item">5.0 Lollipop</li>
+          <li className="mdl-menu__item">4.4 KitKat</li>
+          <li disabled className="mdl-menu__item">4.3 Jelly Bean</li>
+          <li className="mdl-menu__item">Android History</li>
+        </ul>
+          <span className="android-mobile-title mdl-layout-title">
+            <img className="android-logo-image" src="images/android-logo.png">
+          </span>
       </div>
     </div>
-  </main>
+
+    <div className="android-drawer mdl-layout__drawer">
+        <span className="mdl-layout-title">
+          <img className="android-logo-image" src="images/android-logo-white.png">
+        </span>
+      <nav className="mdl-navigation">
+        <a className="mdl-navigation__link" href="">Purchase</a>
+        <a className="mdl-navigation__link" href="">View</a>
+      </nav>
+    </div>
+
+    <div className="android-content mdl-layout__content">
+      <a name="top"></a>
+
+      <div className="android-be-together-section mdl-typography--text-center">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Update</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  View Updates
+                </a>
+              </div>
+            </div>
+            <!-- /mdl-card -->
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Update</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  View Updates
+                </a>
+              </div>
+            </div>
+            <!-- /mdl-card -->
+          </div>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Update</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  View Updates
+                </a>
+              </div>
+            </div>
+            <!-- /mdl-card -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

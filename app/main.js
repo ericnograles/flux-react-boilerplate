@@ -1,7 +1,6 @@
 var React = require('react');
 var Login = require('./components/Login/Login.js');
 var Landing = require('./components/Landing/Landing.js');
-var Dashboard = require('./components/Dashboard/Dashboard.js');
 var Router = require('react-router').Router;
 var UserStore = require('./stores/UserStore.js');
 var history = require('./history.js');
@@ -23,10 +22,7 @@ var routes =
     {
       path: '/',
       component: Landing,
-      onEnter: verifyAuth,
-      childRoutes: [
-        { path: '/dashboard', component: Dashboard, onEnter: verifyAuth }
-      ]
+      //onEnter: verifyAuth
     }
   ];
 
