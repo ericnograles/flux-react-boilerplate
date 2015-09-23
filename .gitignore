@@ -1,3 +1,4 @@
+/code-coverage
 .idea
 node_modules
 *.rt.js

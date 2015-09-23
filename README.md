@@ -52,7 +52,7 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 
 
 ### TODO's
-* SASS support
+
 
 ## Collaborating
 

@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
 var browserify = require('browserify');
 var watch = require('gulp-watch');
-var babelify = require('babelify'); 
+var babelify = require('babelify');
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
@@ -10,6 +10,7 @@ var notify = require('gulp-notify');
 var concat = require('gulp-concat');
 var cssmin = require('gulp-cssmin');
 var gutil = require('gulp-util');
+var sass = require('gulp-sass');
 var glob = require('glob');
 var webserver = require('gulp-webserver');
 var rt = require('gulp-react-templates');
@@ -41,7 +42,8 @@ gulp.task('compile-index', ['react-templates'], function() {
     socketIOPath: environmentConfig.socketIOPath,
     app: buildConfig.index.scripts.app,
     vendor: buildConfig.index.scripts.vendors,
-    css: buildConfig.index.scripts.css
+    vendorCSS: buildConfig.index.scripts.vendorsCSS,
+    appCSS: buildConfig.index.scripts.appCSS
   };
 
   var start = Date.now();
@@ -60,7 +62,7 @@ gulp.task('react-templates', function() {
   return gulp.src(buildConfig.reactTemplates)
     .pipe(rt({modules: 'commonjs'}))
     .pipe(gulp.dest(buildConfig.srcDirectory))
-    .pipe(notify(function () {
+    .pipe(notify(function() {
       console.log('react-templates built in ' + (Date.now() - start) + 'ms');
     }));
 
@@ -143,49 +145,89 @@ gulp.task('browserify-unit-tests', function() {
     }));
 });
 
-gulp.task('stylesheets', function() {
+gulp.task('stylesheets-vendor', function() {
   var start = new Date();
-  console.log('Building CSS bundle');
+  console.log('Building CSS VENDOR bundle');
 
   if (isDevelopment) {
     return gulp.src(buildConfig.stylesheets)
-      .pipe(concat(buildConfig.index.scripts.css))
+      .pipe(concat(buildConfig.index.scripts.vendorsCSS))
       .pipe(gulp.dest(environmentConfig.dest))
       .pipe(notify(function () {
-        console.log('CSS bundle built in ' + (Date.now() - start) + 'ms');
+        console.log('CSS VENDOR bundle built in ' + (Date.now() - start) + 'ms');
       }));
   } else {
     return gulp.src(buildConfig.stylesheets)
-      .pipe(concat(buildConfig.index.scripts.css))
+      .pipe(concat(buildConfig.index.scripts.vendorsCSS))
       .pipe(cssmin())
       .pipe(gulp.dest(environmentConfig.dest))
       .pipe(notify(function () {
-        console.log('CSS (Minified) bundle built in ' + (Date.now() - start) + 'ms');
+        console.log('CSS (Minified) VENDOR bundle built in ' + (Date.now() - start) + 'ms');
       }));
   }
 });
 
-gulp.task('webserver',['compile-index', 'unit-tests', 'stylesheets'], function() {
+gulp.task('sass-app', function() {
+  var start = new Date();
+  console.log('Generating CSS APP bundle from SCSS');
+
+  var sassError = function(err) {
+    console.log('Error compiling sass:' + JSON.stringify(err));
+  };
+
+  isDevelopment = false;
+
   if (isDevelopment) {
-    return gulp.src(environmentConfig.dest)
-      .pipe(webserver({
-        livereload: buildConfig.webServer.liveReload,
-        fallback: 'index.html',
-        directoryListing: false,
-        open: true,
-        port: buildConfig.webServer.port
+    return gulp.src(buildConfig.sass)
+      .pipe(sass({
+        onError: sassError,
+        outputStyle: 'expanded'
       }))
-      .pipe(notify(function () {
-        console.log('gulp-webserver started on port ' + buildConfig.webServer.port);
+      .pipe(gulp.dest(environmentConfig.dest))
+      .pipe(notify(function() {
+        console.log(
+          'CSS APP bundle built in ' + (Date.now() - start) + 'ms');
       }));
   } else {
-    return;
+    return gulp.src(buildConfig.sass)
+      .pipe(sass({
+        onError: sassError,
+        outputStyle: 'compressed'
+      }))
+      .pipe(cssmin({
+        keepSpecialComments: 0
+      }))
+      .pipe(gulp.dest(environmentConfig.dest))
+      .pipe(notify(function() {
+        console.log(
+          'CSS (Minified) APP bundle built in ' + (Date.now() - start) + 'ms');
+      }));
   }
 });
 
-gulp.task('deploy', ['compile-index', 'unit-tests', 'stylesheets'], function() {
-  console.log('Successfully deployed to ' + environmentConfig.dest);
-});
+gulp.task('webserver',['compile-index', 'unit-tests', 'stylesheets-vendor', 'sass-app'], function() {
+    if (isDevelopment) {
+      return gulp.src(environmentConfig.dest)
+        .pipe(webserver({
+          livereload: buildConfig.webServer.liveReload,
+          fallback: 'index.html',
+          directoryListing: false,
+          open: true,
+          port: buildConfig.webServer.port
+        }))
+        .pipe(notify(function () {
+          console.log(
+            'gulp-webserver started on port ' + buildConfig.webServer.port);
+        }));
+    } else {
+      return;
+    }
+  });
+
+gulp.task('deploy',
+  ['compile-index', 'unit-tests', 'stylesheets-vendor', 'sass-app'], function() {
+    console.log('Successfully deployed to ' + environmentConfig.dest);
+  });
 
 gulp.task('unit-tests', ['browserify-app'], function(done) {
   new Server({
@@ -196,5 +238,5 @@ gulp.task('unit-tests', ['browserify-app'], function(done) {
 
 // Starts our development workflow
 gulp.task('default', ['webserver'], function () {
-  gulp.watch(buildConfig.watchFiles, {readDelay: 600}, ['compile-index', 'unit-tests', 'stylesheets']);
+  gulp.watch(buildConfig.watchFiles, {readDelay: 600}, ['compile-index', 'unit-tests', 'stylesheets-vendor', 'sass-app']);
 });
