@@ -175,8 +175,6 @@ gulp.task('sass-app', function() {
     console.log('Error compiling sass:' + JSON.stringify(err));
   };
 
-  isDevelopment = false;
-
   if (isDevelopment) {
     return gulp.src(buildConfig.sass)
       .pipe(sass({
