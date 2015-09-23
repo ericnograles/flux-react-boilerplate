@@ -41,6 +41,11 @@
 	url("fonts/and_black.ttf") format('truetype');
 }
 
+@font-face {
+	font-family: "Always Forever";
+	src: url("fonts/always_forever.ttf");
+}
+
 body {
 	margin: 0;
 }
@@ -235,15 +240,33 @@ a img{
 	height: 800px;
 	width: auto;
 	background-color: #f3f3f3;
-	background: url('images/arlington.png') center 30% no-repeat;
+	background: url('images/soldiers-kneeling.png') center 30% no-repeat;
 	background-size: cover;
 }
 
 .android-font {
 	font-family: 'And Black', 'Helvetica', 'Arial', sans-serif;
 	line-height: 1;
+	color: black;
+	font-weight: 300;
+}
+
+.donation-form {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-radius: 25px;
+	background-color: white;
+	width: 50%;
+	margin: 0 auto;
+	color: black;
+}
+
+.always-forever-font-title {
+	font-family: 'Always Forever', 'Helvetica', 'Arial', sans-serif;
+	line-height: 1;
 	color: #767777;
 	font-weight: 300;
+	font-size: 42px;
 }
 
 .android-slogan {
