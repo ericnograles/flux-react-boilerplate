@@ -6,6 +6,7 @@ module.exports = {
     stylesheets: ['./node_modules/material-design-lite/material.min.css'], // For vendor library css
     sass: ['./app/styles/main.scss'],
     reactTemplates: './app/**/*.rt',
+    designs: ['./designs/**/*.html'],
     tests: {
       src: ['./app/**/*.spec.js'],
       dest: 'specs.js'
@@ -19,7 +20,7 @@ module.exports = {
         vendorsCSS: 'vendors.css'
       }
     },
-    watchFiles: ['./app/**/*.html','./app/**/*.js', './app/**/*.rt', './styles/**/*.css'],
+    watchFiles: ['./app/**/*.html','./app/**/*.js', './app/**/*.rt', './app/styles/**/*.scss', './config/gulpfile.conf.js'],
     dest: {
       build: './build',
       dist: './dist'

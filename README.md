@@ -4,9 +4,15 @@
 
 ## Vision
 
-This project is intended to be a boilerplate of best practices for Flux and React gathered fom Christian's original fork along with some gulpfile support to support environment-specific CI, automated unit tests, live reloading web server, and an opinionated structure on how to organize your React code.
+This project is intended to be a boilerplate of best practices for Flux and React gathered fom Christian's original fork with an opinionated structure on how to organize your React code.
 
 The patterns in the project are partially inspired by my prior work in AngularJS, specifically [MEAN-Enterprise](https://github.com/CraftySquad/mean-enterprise.ui). The main goal I wanted to accomplish was to create a React boilerplate that would be somewhat familiar to Angular folks, so I hope that gives context to the architectural decisions below.
+
+## Features
+* Automated development and build via gulpfile
+* Headless unit testing support
+* Live reloading webserver
+* UI/UX Design Mode for quick prototyping
 
 ## Architecture
 * **Routing**: [react-router](https://github.com/rackt/react-router)
@@ -20,12 +26,20 @@ The patterns in the project are partially inspired by my prior work in AngularJS
 
 ## Usage
 
-### Development
+### Web Development Mode
 * Run `npm install`
 * Run `gulp`
 * Run `node web.js`
 * Go to `localhost:8200` to display the app
 * Any changes to `app` or `styles` folder will automatically rebuild to `build` folder
+
+### UI/UX Design Mode
+* Run `npm install`
+* Run `gulp design-mode`
+* Go to `localhost:8200/designs/template.html`
+  * For UI/UX development and prototyping, create static *.html files in /design and be sure to reference the vendors.css and main.css as follows (which is also reflected in the template.html):
+    * `<link rel="stylesheet" href="../vendors.css"/>`
+    * `<link rel="stylesheet" href="../main.css"/>`
 
 ### Deployment
 * Run `npm install`
@@ -39,20 +53,17 @@ The patterns in the project are partially inspired by my prior work in AngularJS
   * **components/**: Write your components and unit tests here by directory
   * **stores/**: Compose stores that your components will interact with
   * **services/**: Application-wide services
+  * **styles/**: Store your .scss files here for SASS compilation
   * **.spec.js files**: The opinion of this project is to set unit tests alongside of your code for accessibility
   * **.rt files**: We use react-templates to divorce the HTML DOM from the actual React files. Intermingling templates (be it JSX or otherwise) with JS files never sat well with me  :)
 * **config/**: Configurations to support gulp task automation and CI
   * **gulpfile.conf.js**: All config variables needed by gulp task automation.
   * **karma.conf.js**: Karma test runner configuration
+* **designs/**: For UI/UX designers, a place to store static *.html files for rapid prototyping
 * **build/**: Where your automatically builds to. This is where you launch your app in development
 * **dist/**: Where the deployed code exists, ready for production
-* **styles/**: Where you put your css files
 * **gulpfile**: Gulp tasks
 * **web.js**: A minimalist Express server that simulates jwt authentication and content distribution for HTML5 mode
-
-
-### TODO's
-
 
 ## Collaborating
 

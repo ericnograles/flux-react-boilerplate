@@ -234,7 +234,38 @@ gulp.task('unit-tests', ['browserify-app'], function(done) {
   }, done).start();
 });
 
-// Starts our development workflow
+// Developer workflow
 gulp.task('default', ['webserver'], function () {
   gulp.watch(buildConfig.watchFiles, {readDelay: 600}, ['compile-index', 'unit-tests', 'stylesheets-vendor', 'sass-app']);
+});
+
+// UI/UX workflow
+gulp.task('copy-designs', function() {
+  var start = Date.now();
+  console.log('Coping UI designs');
+  return gulp.src(buildConfig.designs)
+    .pipe(gulp.dest(environmentConfig.dest + '/designs'))
+    .pipe(notify(function() {
+      console.log('UI designs copied in ' + + (Date.now() - start) + 'ms');
+    }));
+});
+
+gulp.task('webserver-designers', ['copy-designs'], function() {
+  return gulp.src(environmentConfig.dest)
+    .pipe(webserver({
+      livereload: buildConfig.webServer.liveReload,
+      directoryListing: false,
+      open: '/designs/template.html',
+      port: buildConfig.webServer.port
+    }))
+    .pipe(notify(function () {
+      console.log('gulp-webserver started on port ' + buildConfig.webServer.port);
+    }));
+});
+
+gulp.task('design-mode', ['browserify-vendors', 'stylesheets-vendor', 'sass-app', 'webserver-designers'], function() {
+  var watchFiles = buildConfig.stylesheets
+    .concat(buildConfig.designs);
+
+  gulp.watch(watchFiles, ['browserify-vendors', 'stylesheets-vendor', 'sass-app', 'copy-designs']);
 });
